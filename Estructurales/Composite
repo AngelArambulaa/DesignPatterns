@@ -1,0 +1,33 @@
+Nombre: Composite
+Categoría: Estructural
+Propósito: Permite tratar objetos individuales y composiciones de objetos de manera uniforme.
+Códigos de Referencia:
+Java
+interface Component {
+    void operation();
+}
+
+class Leaf implements Component {
+    public void operation() {
+        System.out.println("Leaf");
+    }
+}
+
+class Composite implements Component {
+    private List<Component> children = new ArrayList<>();
+    public void add(Component c) { children.add(c); }
+    public void operation() {
+        children.forEach(Component::operation);
+    }
+}
+
+Javascript
+class Leaf {
+  operation() { console.log("Leaf"); }
+}
+
+class Composite {
+  constructor() { this.children = []; }
+  add(c) { this.children.push(c); }
+  operation() { this.children.forEach(c => c.operation()); }
+}
