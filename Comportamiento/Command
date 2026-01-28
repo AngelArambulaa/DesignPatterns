@@ -93,3 +93,20 @@ const lightOn = new LightOnCommand(light);
 const remote = new RemoteControl();
 remote.setCommand(lightOn);
 remote.pressButton();
+
+┌─────────────┐       ┌─────────────┐
+│   Invoker   │──────▶│   Command   │
+└─────────────┘       ├─────────────┤
+                      │ + execute() │
+                      └─────────────┘
+                              △
+                              │
+                      ┌─────────────┐
+                      │ConcreteCommand
+                      ├─────────────┤
+                      │ + execute() │
+                      └─────────────┘
+                              │
+                      ┌─────────────┐
+                      │   Receiver  │
+                      └─────────────┘
