@@ -36,3 +36,8 @@ class USAdapter:
 
     def connect(self):
         self.socket.connect()
+
+UML:
+Client --> Target
+Adapter --> Adaptee
+
