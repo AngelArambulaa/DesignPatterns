@@ -74,3 +74,18 @@ class ConcreteHandlerB(Handler):
 chain = ConcreteHandlerA()
 chain.set_next(ConcreteHandlerB())
 chain.handle("B")
+
+#UML
+┌─────────────────┐
+│    Handler      │
+├─────────────────┤
+│ + setNext()     │
+│ + handleRequest()│
+└─────────────────┘
+         △
+         │
+┌─────────────────┐
+│ ConcreteHandler │
+├─────────────────┤
+│ + handleRequest()│
+└─────────────────┘
