@@ -94,6 +94,7 @@ const remote = new RemoteControl();
 remote.setCommand(lightOn);
 remote.pressButton();
 
+#UML
 ┌─────────────┐       ┌─────────────┐
 │   Invoker   │──────▶│   Command   │
 └─────────────┘       ├─────────────┤
