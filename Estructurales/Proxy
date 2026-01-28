@@ -1,0 +1,36 @@
+Nombre: Proxy
+Categoría: Estructural
+Propósito: Proporciona un objeto sustituto que controla el acceso a otro objeto.
+Código de Referencia
+Java
+interface Service {
+    void request();
+}
+
+class RealService implements Service {
+    public void request() {
+        System.out.println("Request");
+    }
+}
+
+class Proxy implements Service {
+    private RealService real;
+    public void request() {
+        if (real == null) real = new RealService();
+        real.request();
+    }
+}
+
+
+JavaScript
+class RealService {
+  request() { console.log("Request"); }
+}
+
+class Proxy {
+  constructor() { this.real = null; }
+  request() {
+    if (!this.real) this.real = new RealService();
+    this.real.request();
+  }
+}
