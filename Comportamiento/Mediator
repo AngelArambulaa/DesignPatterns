@@ -144,6 +144,8 @@ colleague_a.send("Hola desde A")
 colleague_b.send("Hola desde B")
 Estructura UML:
 text
+
+#UML
 ┌─────────────────┐       ┌─────────────────┐
 │    Mediator     │◀──────│    Colleague    │
 ├─────────────────┤       ├─────────────────┤
