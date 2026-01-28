@@ -50,3 +50,8 @@ class HouseBuilder:
 
     def build(self):
         return self.house
+
+UML:
+Director --> Builder --> Product
+
+
