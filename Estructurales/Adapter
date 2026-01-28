@@ -1,0 +1,38 @@
+Adapter
+
+Nombre: Adapter
+Categoría: Estructural
+Propósito: Permite que clases con interfaces incompatibles trabajen juntas.
+
+Código de Referencia
+
+JAVA:
+class EuropeanSocket {
+    void connect() {
+        System.out.println("Connected to European socket");
+    }
+}
+
+class USAdapter {
+    private EuropeanSocket socket;
+
+    USAdapter(EuropeanSocket socket) {
+        this.socket = socket;
+    }
+
+    void connect() {
+        socket.connect();
+    }
+}
+
+Python:
+class EuropeanSocket:
+    def connect(self):
+        print("Connected to European socket")
+
+class USAdapter:
+    def __init__(self, socket):
+        self.socket = socket
+
+    def connect(self):
+        self.socket.connect()
