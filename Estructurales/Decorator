@@ -1,0 +1,35 @@
+Nombre: Decorator
+Categoría: Estructural
+Propósito: Añade responsabilidades a un objeto de forma dinámica sin modificar su clase original.
+Códigos de Referencia
+Java
+interface Component {
+    void operation();
+}
+
+class ConcreteComponent implements Component {
+    public void operation() {
+        System.out.println("Base");
+    }
+}
+
+class Decorator implements Component {
+    protected Component component;
+    public Decorator(Component component) {
+        this.component = component;
+    }
+    public void operation() {
+        component.operation();
+    }
+}
+
+
+JavaScript
+class Component {
+  operation() { console.log("Base"); }
+}
+
+class Decorator {
+  constructor(component) { this.component = component; }
+  operation() { this.component.operation(); }
+}
