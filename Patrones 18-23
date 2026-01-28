@@ -1,0 +1,129 @@
+Patrones de comportamiento
+
+18. Memento
+
+Propósito: Guarda y restaura el estado interno de un objeto.
+
+Código:
+class Memento:
+    def __init__(self, state):
+        self.state = state
+
+class Memento {
+  private String state;
+}
+
+
+UML:
+Originator --> Memento
+Caretaker --> Memento
+
+
+19. Observer
+
+Propósito: Notifica cambios a múltiples observadores.
+
+Código:
+Java
+
+interface Observer { void update(); }
+
+
+Python
+
+class Observer:
+    def update(self): pass
+
+
+UML:
+
+Subject --> Observer
+
+20. State
+
+Propósito: Cambia el comportamiento según el estado interno.
+
+Codigo:
+Java
+
+interface State { void handle(); }
+
+
+Python
+
+class State:
+    def handle(self): pass
+
+
+UML:
+
+Context --> State
+
+21. Strategy
+
+Propósito: Define algoritmos intercambiables.
+
+Codigo:
+Java
+
+interface Strategy { void execute(); }
+
+
+Python
+
+class Strategy:
+    def execute(self): pass
+
+
+UML:
+
+Context --> Strategy
+
+22. Template Method
+
+Propósito: Define el esqueleto de un algoritmo.
+
+Codigo:
+Java
+
+abstract class Template {
+  final void templateMethod() {}
+}
+
+
+Python
+
+class Template:
+    def template_method(self): pass
+
+
+UML:
+
+AbstractClass
+ └─ ConcreteClass
+
+23. Visitor
+
+Propósito: Separa algoritmos de la estructura de objetos.
+
+Codigo:
+Java
+
+interface Visitor {
+  void visit(Element e);
+}
+
+
+Python
+
+class Visitor:
+    def visit(self, element): pass
+
+
+UML
+
+Visitor --> Element
+ConcreteVisitor --> ConcreteElement
+
+
+
