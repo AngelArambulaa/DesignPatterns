@@ -1,0 +1,35 @@
+Factory Method
+
+Nombre: Factory Method
+Categoría: Creacional
+Propósito: Define una interfaz para crear un objeto, permitiendo que las subclases decidan qué clase instanciar.
+
+Código de Referencia
+
+JAVA:
+interface Transport {
+    void deliver();
+}
+
+class Truck implements Transport {
+    public void deliver() {
+        System.out.println("Deliver by land");
+    }
+}
+
+abstract class Logistics {
+    abstract Transport createTransport();
+}
+
+Python:
+class Transport:
+    def deliver(self):
+        pass
+
+class Truck(Transport):
+    def deliver(self):
+        print("Deliver by land")
+
+UML:
+Creator --> Product
+ConcreteCreator --> ConcreteProduct
