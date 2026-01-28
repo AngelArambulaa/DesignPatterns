@@ -1,0 +1,30 @@
+Singleton
+
+Nombre: Singleton
+Categoría: Creacional
+Propósito: Garantizar que una clase tenga una única instancia y proporcionar un punto de acceso global a ella.
+
+Código de Referencia:
+
+JAVA:
+public class Database {
+    private static Database instance;
+
+    private Database() {}
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+}
+
+Python:
+class Database:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
