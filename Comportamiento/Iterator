@@ -1,0 +1,115 @@
+Nombre: Iterator
+Categoría: Comportamiento
+Propósito: Proporciona una forma de acceder secuencialmente a los elementos de un objeto agregado sin exponer su representación subyacente.
+Código de Referencia:
+Java:
+
+java
+interface Iterator<T> {
+    boolean hasNext();
+    T next();
+}
+
+interface IterableCollection<T> {
+    Iterator<T> createIterator();
+}
+
+class ConcreteCollection implements IterableCollection<String> {
+    private String[] items = {"A", "B", "C", "D"};
+    
+    public Iterator<String> createIterator() {
+        return new ConcreteIterator(this);
+    }
+    
+    public int getCount() {
+        return items.length;
+    }
+    
+    public String getItem(int index) {
+        return items[index];
+    }
+}
+
+class ConcreteIterator implements Iterator<String> {
+    private ConcreteCollection collection;
+    private int position = 0;
+    
+    public ConcreteIterator(ConcreteCollection collection) {
+        this.collection = collection;
+    }
+    
+    public boolean hasNext() {
+        return position < collection.getCount();
+    }
+    
+    public String next() {
+        if (hasNext()) {
+            return collection.getItem(position++);
+        }
+        return null;
+    }
+}
+
+// Uso
+ConcreteCollection collection = new ConcreteCollection();
+Iterator<String> iterator = collection.createIterator();
+while (iterator.hasNext()) {
+    System.out.println(iterator.next());
+}
+C#:
+
+csharp
+using System;
+using System.Collections;
+
+interface IIterator {
+    bool HasNext();
+    object Next();
+}
+
+class ConcreteCollection : IEnumerable {
+    private string[] items = { "A", "B", "C", "D" };
+    
+    public IIterator CreateIterator() {
+        return new ConcreteIterator(this);
+    }
+    
+    public int Count {
+        get { return items.Length; }
+    }
+    
+    public string this[int index] {
+        get { return items[index]; }
+    }
+    
+    public IEnumerator GetEnumerator() {
+        return items.GetEnumerator();
+    }
+}
+
+class ConcreteIterator : IIterator {
+    private ConcreteCollection collection;
+    private int position = 0;
+    
+    public ConcreteIterator(ConcreteCollection collection) {
+        this.collection = collection;
+    }
+    
+    public bool HasNext() {
+        return position < collection.Count;
+    }
+    
+    public object Next() {
+        if (HasNext()) {
+            return collection[position++];
+        }
+        return null;
+    }
+}
+
+// Uso
+var collection = new ConcreteCollection();
+var iterator = collection.CreateIterator();
+while (iterator.HasNext()) {
+    Console.WriteLine(iterator.Next());
+}
