@@ -1,0 +1,52 @@
+Builder
+
+Nombre: Builder
+Categoría: Creacional
+Propósito: Separa la construcción de un objeto complejo de su representación.
+
+Código de Referencia
+
+JAVA:
+class House {
+    String walls;
+    String roof;
+}
+
+class HouseBuilder {
+    private House house = new House();
+
+    HouseBuilder buildWalls(String walls) {
+        house.walls = walls;
+        return this;
+    }
+
+    HouseBuilder buildRoof(String roof) {
+        house.roof = roof;
+        return this;
+    }
+
+    House build() {
+        return house;
+    }
+}
+
+Python:
+class House:
+    def __init__(self):
+        self.walls = None
+        self.roof = None
+
+class HouseBuilder:
+    def __init__(self):
+        self.house = House()
+
+    def build_walls(self, walls):
+        self.house.walls = walls
+        return self
+
+    def build_roof(self, roof):
+        self.house.roof = roof
+        return self
+
+    def build(self):
+        return self.house
