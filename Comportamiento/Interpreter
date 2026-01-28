@@ -1,0 +1,93 @@
+Nombre: Interpreter
+Categoría: Comportamiento
+Propósito: Define una representación gramatical para un lenguaje y un intérprete que usa la representación para interpretar sentencias en el lenguaje.
+Código de Referencia:
+Java:
+
+java
+interface Expression {
+    int interpret();
+}
+
+class Number implements Expression {
+    private int value;
+    
+    public Number(int value) {
+        this.value = value;
+    }
+    
+    public int interpret() {
+        return value;
+    }
+}
+
+class Add implements Expression {
+    private Expression left;
+    private Expression right;
+    
+    public Add(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+    
+    public int interpret() {
+        return left.interpret() + right.interpret();
+    }
+}
+
+class Subtract implements Expression {
+    private Expression left;
+    private Expression right;
+    
+    public Subtract(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+    
+    public int interpret() {
+        return left.interpret() - right.interpret();
+    }
+}
+
+// Uso: 5 + 3 - 2
+Expression expression = new Subtract(
+    new Add(new Number(5), new Number(3)),
+    new Number(2)
+);
+System.out.println("Resultado: " + expression.interpret()); // 6
+Python:
+
+python
+from abc import ABC, abstractmethod
+
+class Expression(ABC):
+    @abstractmethod
+    def interpret(self):
+        pass
+
+class Number(Expression):
+    def __init__(self, value):
+        self.value = value
+    
+    def interpret(self):
+        return self.value
+
+class Add(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+    
+    def interpret(self):
+        return self.left.interpret() + self.right.interpret()
+
+class Subtract(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+    
+    def interpret(self):
+        return self.left.interpret() - self.right.interpret()
+
+# Uso: 5 + 3 - 2
+expression = Subtract(Add(Number(5), Number(3)), Number(2))
+print(f"Resultado: {expression.interpret()}")  # 6
