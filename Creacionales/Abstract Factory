@@ -1,0 +1,29 @@
+Abstract Factory
+
+Nombre: Abstract Factory
+Categoría: Creacional
+Propósito: Proporciona una interfaz para crear familias de objetos relacionados sin especificar sus clases concretas.
+
+Código de Referencia
+
+JAVA:
+interface Button {
+    void paint();
+}
+
+interface GUIFactory {
+    Button createButton();
+}
+
+Python:
+class Button:
+    def paint(self):
+        pass
+
+class GUIFactory:
+    def create_button(self):
+        pass
+
+UML:
+AbstractFactory --> AbstractProduct
+ConcreteFactory --> ConcreteProduct
