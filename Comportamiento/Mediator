@@ -1,0 +1,158 @@
+Nombre: Mediator
+Categoría: Comportamiento
+Propósito: Define un objeto que encapsula cómo un conjunto de objetos interactúa, promoviendo el acoplamiento débil al evitar que los objetos se refieran explícitamente entre sí.
+Código de Referencia:
+Java:
+
+java
+interface Mediator {
+    void send(String message, Colleague colleague);
+}
+
+abstract class Colleague {
+    protected Mediator mediator;
+    
+    public Colleague(Mediator mediator) {
+        this.mediator = mediator;
+    }
+    
+    public abstract void receive(String message);
+    public abstract void send(String message);
+}
+
+class ConcreteColleagueA extends Colleague {
+    public ConcreteColleagueA(Mediator mediator) {
+        super(mediator);
+    }
+    
+    public void receive(String message) {
+        System.out.println("Colleague A recibe: " + message);
+    }
+    
+    public void send(String message) {
+        mediator.send(message, this);
+    }
+}
+
+class ConcreteColleagueB extends Colleague {
+    public ConcreteColleagueB(Mediator mediator) {
+        super(mediator);
+    }
+    
+    public void receive(String message) {
+        System.out.println("Colleague B recibe: " + message);
+    }
+    
+    public void send(String message) {
+        mediator.send(message, this);
+    }
+}
+
+class ConcreteMediator implements Mediator {
+    private ConcreteColleagueA colleagueA;
+    private ConcreteColleagueB colleagueB;
+    
+    public void setColleagueA(ConcreteColleagueA colleagueA) {
+        this.colleagueA = colleagueA;
+    }
+    
+    public void setColleagueB(ConcreteColleagueB colleagueB) {
+        this.colleagueB = colleagueB;
+    }
+    
+    public void send(String message, Colleague colleague) {
+        if (colleague == colleagueA) {
+            colleagueB.receive(message);
+        } else {
+            colleagueA.receive(message);
+        }
+    }
+}
+
+// Uso
+ConcreteMediator mediator = new ConcreteMediator();
+ConcreteColleagueA colleagueA = new ConcreteColleagueA(mediator);
+ConcreteColleagueB colleagueB = new ConcreteColleagueB(mediator);
+
+mediator.setColleagueA(colleagueA);
+mediator.setColleagueB(colleagueB);
+
+colleagueA.send("Hola desde A");
+colleagueB.send("Hola desde B");
+Python:
+
+python
+from abc import ABC, abstractmethod
+
+class Mediator(ABC):
+    @abstractmethod
+    def send(self, message, colleague):
+        pass
+
+class Colleague(ABC):
+    def __init__(self, mediator):
+        self.mediator = mediator
+    
+    @abstractmethod
+    def receive(self, message):
+        pass
+    
+    @abstractmethod
+    def send(self, message):
+        pass
+
+class ConcreteColleagueA(Colleague):
+    def receive(self, message):
+        print(f"Colleague A recibe: {message}")
+    
+    def send(self, message):
+        self.mediator.send(message, self)
+
+class ConcreteColleagueB(Colleague):
+    def receive(self, message):
+        print(f"Colleague B recibe: {message}")
+    
+    def send(self, message):
+        self.mediator.send(message, self)
+
+class ConcreteMediator(Mediator):
+    def __init__(self):
+        self.colleague_a = None
+        self.colleague_b = None
+    
+    def set_colleague_a(self, colleague):
+        self.colleague_a = colleague
+    
+    def set_colleague_b(self, colleague):
+        self.colleague_b = colleague
+    
+    def send(self, message, colleague):
+        if colleague == self.colleague_a:
+            self.colleague_b.receive(message)
+        else:
+            self.colleague_a.receive(message)
+
+# Uso
+mediator = ConcreteMediator()
+colleague_a = ConcreteColleagueA(mediator)
+colleague_b = ConcreteColleagueB(mediator)
+
+mediator.set_colleague_a(colleague_a)
+mediator.set_colleague_b(colleague_b)
+
+colleague_a.send("Hola desde A")
+colleague_b.send("Hola desde B")
+Estructura UML:
+text
+┌─────────────────┐       ┌─────────────────┐
+│    Mediator     │◀──────│    Colleague    │
+├─────────────────┤       ├─────────────────┤
+│ + send()        │       │ - mediator      │
+└─────────────────┘       │ + receive()     │
+         △                │ + send()        │
+         │                └─────────────────┘
+┌─────────────────┐                 △
+│ConcreteMediator │        ┌─────────────────┐
+├─────────────────┤        │ConcreteColleague│
+│ + send()        │        └─────────────────┘
+└─────────────────┘
