@@ -1,0 +1,95 @@
+Nombre: Command
+Categoría: Comportamiento
+Propósito: Encapsula una solicitud como un objeto, permitiendo parametrizar clientes con diferentes solicitudes, hacer cola o registrar solicitudes.
+Código de Referencia:
+Java:
+
+java
+interface Command {
+    void execute();
+}
+
+class Light {
+    void turnOn() {
+        System.out.println("Luz encendida");
+    }
+    
+    void turnOff() {
+        System.out.println("Luz apagada");
+    }
+}
+
+class LightOnCommand implements Command {
+    private Light light;
+    
+    public LightOnCommand(Light light) {
+        this.light = light;
+    }
+    
+    public void execute() {
+        light.turnOn();
+    }
+}
+
+class RemoteControl {
+    private Command command;
+    
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+    
+    public void pressButton() {
+        command.execute();
+    }
+}
+
+// Uso
+Light light = new Light();
+Command lightOn = new LightOnCommand(light);
+RemoteControl remote = new RemoteControl();
+remote.setCommand(lightOn);
+remote.pressButton();
+JavaScript:
+
+javascript
+class Command {
+    execute() {}
+}
+
+class Light {
+    turnOn() {
+        console.log("Luz encendida");
+    }
+    
+    turnOff() {
+        console.log("Luz apagada");
+    }
+}
+
+class LightOnCommand extends Command {
+    constructor(light) {
+        super();
+        this.light = light;
+    }
+    
+    execute() {
+        this.light.turnOn();
+    }
+}
+
+class RemoteControl {
+    setCommand(command) {
+        this.command = command;
+    }
+    
+    pressButton() {
+        this.command.execute();
+    }
+}
+
+// Uso
+const light = new Light();
+const lightOn = new LightOnCommand(light);
+const remote = new RemoteControl();
+remote.setCommand(lightOn);
+remote.pressButton();
