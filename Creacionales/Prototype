@@ -1,0 +1,26 @@
+Prototype
+
+Nombre: Prototype
+Categoría: Creacional
+Propósito: Permite crear nuevos objetos copiando una instancia existente.
+
+Código de Referencia
+
+JAVA:
+class Prototype implements Cloneable {
+    public Prototype clone() throws CloneNotSupportedException {
+        return (Prototype) super.clone();
+    }
+}
+
+Python:
+import copy
+
+class Prototype:
+    def clone(self):
+        return copy.copy(self)
+
+UML:
+Prototype
+  |
+clone()
