@@ -91,3 +91,21 @@ class Subtract(Expression):
 # Uso: 5 + 3 - 2
 expression = Subtract(Add(Number(5), Number(3)), Number(2))
 print(f"Resultado: {expression.interpret()}")  # 6
+
+
+#UML
+┌─────────────────┐
+│   Expression    │
+├─────────────────┤
+│ + interpret()   │
+└─────────────────┘
+         △
+         │
+┌─────────────────┐   ┌─────────────────┐
+│ TerminalExpression │   │NonTerminalExpression│
+└─────────────────┘   └─────────────────┘
+                              △
+                              │
+                 ┌─────────────────────────┐
+                 │   Add, Subtract, etc.   │
+                 └─────────────────────────┘
