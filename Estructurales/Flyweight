@@ -1,0 +1,31 @@
+Nombre: Flyweight
+Categoría: Estructural
+Propósito: Reduce el uso de memoria compartiendo objetos similares en lugar de crear muchos objetos individuales.
+Códigos de Referencia
+Java
+class Flyweight {
+    private String sharedState;
+    public Flyweight(String state) {
+        this.sharedState = state;
+    }
+}
+
+class FlyweightFactory {
+    private static Map<String, Flyweight> pool = new HashMap<>();
+    public static Flyweight get(String key) {
+        pool.putIfAbsent(key, new Flyweight(key));
+        return pool.get(key);
+    }
+}
+
+
+JavaScript
+class Flyweight {
+  constructor(state) { this.state = state; }
+}
+
+const pool = {};
+function getFlyweight(key) {
+  if (!pool[key]) pool[key] = new Flyweight(key);
+  return pool[key];
+}
