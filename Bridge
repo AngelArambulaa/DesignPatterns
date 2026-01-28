@@ -1,0 +1,35 @@
+Nombre: Bridge
+Categoría: Estructural
+Propósito: Desacopla una abstracción de su implementación para que ambas puedan variar independientemente.
+
+
+Códigos de Referencia:
+Java
+interface Device {
+    void on();
+}
+
+class TV implements Device {
+    public void on() { System.out.println("TV on"); }
+}
+
+abstract class Remote {
+    protected Device device;
+    protected Remote(Device device) { this.device = device; }
+    abstract void pressPower();
+}
+
+class BasicRemote extends Remote {
+    public BasicRemote(Device device) { super(device); }
+    void pressPower() { device.on(); }
+}
+
+Javascript
+class TV {
+  on() { console.log("TV on"); }
+}
+
+class Remote {
+  constructor(device) { this.device = device; }
+  pressPower() { this.device.on(); }
+}
